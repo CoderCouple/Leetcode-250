@@ -50,3 +50,53 @@ class ElementComparator implements Comparator<Element>
         return e1.value - e2.value;
     }
 }
+
+
+=============================================Solution 2 ==================================================
+    
+    class Solution {
+    
+    //https://stackoverflow.com/questions/6065710/how-does-javas-priorityqueue-differ-from-a-min-heap
+    //https://stackoverflow.com/questions/1846225/java-priorityqueue-with-fixed-size
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        Map<Integer,Integer> frequencyMap = new HashMap<Integer,Integer>();
+        for(int num : nums){
+            if(frequencyMap.containsKey(num)){
+                frequencyMap.put(num,frequencyMap.get(num)+1);
+            } else {
+                frequencyMap.put(num, 1);
+            }
+        }
+        
+        PriorityQueue<Element>  pq = new PriorityQueue<Element>();
+        for(Map.Entry<Integer,Integer> entry: frequencyMap.entrySet()){
+            pq.add(new Element(entry.getKey(),entry.getValue()));
+            
+            if(pq.size()>k)   
+            pq.poll();
+        }
+        
+        List<Integer> result = new ArrayList<Integer>();
+        while(!pq.isEmpty()){
+            result.add(pq.poll().key);
+        }
+    
+        return result;
+    }
+}
+
+class Element implements Comparable<Element>{
+    public int key;
+    public int value;
+    
+    public Element(int key,int value){
+        this.key=key;
+        this.value=value;
+    }
+    
+    @Override
+    public int compareTo(Element e){
+        return new Integer(this.value).compareTo(new Integer(e.value));
+    }
+}
+

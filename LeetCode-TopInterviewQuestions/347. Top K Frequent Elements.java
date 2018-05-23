@@ -33,7 +33,7 @@ class Solution {
     }
 }
 
-class Element implements Comparable<Element>{
+class Element{
     public int key;
     public int value;
     

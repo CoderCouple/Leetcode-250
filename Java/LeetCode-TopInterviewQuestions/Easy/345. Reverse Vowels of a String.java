@@ -21,3 +21,41 @@ class Solution {
 
 
 =================================================Solution 2============================================
+
+    
+    class Solution {
+    public String reverseVowels(String s) {
+        if(s == null || s.length()==0) return s;
+        
+        int start=0;
+        int end=s.length()-1;
+        char [] c = s.toCharArray();
+        
+        while(start<end){
+            while(start<end){
+                if(c[start] == 'a' || c[start] == 'e' || c[start] == 'i' || c[start] == 'o' || c[start] == 'u' 
+                || c[start] == 'A' || c[start] == 'E' || c[start] == 'I' || c[start] == 'O' || c[start] == 'U'){
+                    break;
+                }
+                start++;
+            }
+            
+            while(start<end){
+                if(c[end] == 'a' || c[end] == 'e' || c[end] == 'i' || c[end] == 'o' || c[end] == 'u' 
+                || c[end] == 'A' || c[end] == 'E' || c[end] == 'I' || c[end] == 'O' || c[end] == 'U'){
+                     break;
+                 }
+                end--;
+            } 
+            
+            char ch = c[start];
+            c[start]=c[end];
+            c[end]=ch;
+            
+            start++;
+            end--;
+        }
+        
+        return String.valueOf(c);
+    }
+}

@@ -5,7 +5,10 @@ class Solution {
         
         for(String str : strs){
             List<String> list;
-            String key= getSortedString(str);
+            String key= getSortedStringKey(str);
+            // you can use any one of the 2 methods to generate the keys
+            // the counting method reduces the time complexity.
+            //String key= getCountedStringKey(str);
             if(map.containsKey(key))
                 list=map.get(key);
             else{
@@ -18,9 +21,23 @@ class Solution {
         return result;
     }
     
-    public String getSortedString(String str){
+    public String getSortedStringKey(String str){
         char [] acharArray = str.toCharArray();
         Arrays.sort(acharArray);
         return String.valueOf(acharArray);
+    }
+    
+    public String getCountedStringKey(String str){
+        int [] counter = new int [26];
+        char [] ch =  str.toCharArray();
+        for(char c: ch)
+            counter[c-'a']=counter[c-'a']+1;
+        
+        StringBuilder sb = new StringBuilder();
+        for(int i : counter){
+            sb.append("#");
+            sb.append(i);
+        }
+        return sb.toString();
     }
 }

@@ -1,5 +1,5 @@
 class Solution {
-    public List<List<String>> groupAnagrams(String[] strs) {
+    public static List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> result = new ArrayList<List<String>>();
         Map<String,List<String>> map = new HashMap<String,List<String>>();
         
@@ -18,16 +18,18 @@ class Solution {
             list.add(str);
             map.put(key,list);
         }
+        // To sort the array of anagrams
+        Arrays.sort(strs,new StringComparator());
         return result;
     }
     
-    public String getSortedStringKey(String str){
+    public static String getSortedStringKey(String str){
         char [] acharArray = str.toCharArray();
         Arrays.sort(acharArray);
         return String.valueOf(acharArray);
     }
     
-    public String getCountedStringKey(String str){
+    public  static String getCountedStringKey(String str){
         int [] counter = new int [26];
         char [] ch =  str.toCharArray();
         for(char c: ch)
@@ -39,5 +41,11 @@ class Solution {
             sb.append(i);
         }
         return sb.toString();
+    }
+}
+
+class StringComparator implements Comparator<String>{
+    public int compare(String s1,String s2){
+        return Solution.getSortedStringKey(s1).compareTo(Solution.getSortedStringKey(s2));
     }
 }
